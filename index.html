@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Калькулятор чаевых</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="main-header">
+        <h1>Калькулятор чаевых</h1>
+    </header>
+
+    <main class="container">
+        <section class="calculator-section">
+            <h2>Расчет чаевых</h2>
+            <form id="tip-form">
+                <div class="form-group">
+                    <label for="bill-amount">Сумма счета:</label>
+                    <input type="number" id="bill-amount" placeholder="Например, 500" required min="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="tip-percentage">Процент чаевых:</label>
+                    <select id="tip-percentage">
+                        <option value="0.0">0%</option>
+                        <option value="0.05">5%</option>
+                        <option value="0.10" selected>10%</option>
+                        <option value="0.15">15%</option>
+                        <option value="0.20">20%</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="currency">Валюта:</label>
+                    <select id="currency">
+                        <option value="₽">Рубли (₽)</option>
+                        <option value="$">Доллары ($)</option>
+                        <option value="€">Евро (€)</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-submit">Рассчитать</button>
+            </form>
+        </section>
+        <section class="history-section">
+            <h2>История расчетов</h2>
+            <div id="history-list" class="history-list hidden">
+                <p id="empty-message" class="empty-message">История пока пуста...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 <a href="https://github.com" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
