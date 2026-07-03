@@ -16,8 +16,16 @@ form.addEventListener('submit', function(event) {
     let tip = Math.round((bill * percent),0);
     
     // Добавление строчку в историю
+<<<<<<< HEAD
     history.classList.remove('hidden');
     empty_mes.classList.add('hidden');
+=======
+        Promise.all([
+        (() => { history.classList.remove('hidden'); })(),
+        (() => { empty_mes.classList.add('hidden'); })()
+    ])
+    
+>>>>>>> 5321ad9 (feat: implement custom elements, event loop, shadow DOM)
     const historyList = document.getElementById('history-list');
     historyList.innerHTML += '<p>Заказ на ' + bill + ' — чаевые ' + tip + '</p>';
 });
