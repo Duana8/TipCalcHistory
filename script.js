@@ -33,11 +33,12 @@ form.addEventListener('submit', function(event) {
     // Подсчет
     let tip = Math.round((bill * percent),0);
     
-    Promise.all([
+    // Добавление строчку в историю
+        Promise.all([
         (() => { history.classList.remove('hidden'); })(),
         (() => { empty_mes.classList.add('hidden'); })()
     ])
-
+    
     const historyList = document.getElementById('history-list');
     historyList.innerHTML += `<history-item>Заказ на ${bill} — чаевые ${tip}</history-item>`;
 });
