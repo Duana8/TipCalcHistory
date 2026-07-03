@@ -1,3 +1,11 @@
+:root{
+    --primary-color: #27ae60;
+    --heading-color: #34495e;
+    --fon-color: #ffffff;
+    --highlighting_color: #942929;
+    --empty_color: #ccc;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,21 +16,21 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6; /* Высота строки */
-    background-color: #fdfdfd; /* Цвет фона */
-    color: #27ae60; /* Цвет текста*/
+    background-color: var(--fon-color); /* Цвет фона */
+    color: var(--primary-color); /* Цвет текста*/
 }
 
 /* Шапка сайта */
 #main-header {
     text-align: center; /* Выравнивание текста */
     padding: 10px 10px;
-    background-color: #ffffff;
+    background-color: var(--fon-color);
     perspective: 400px;
 }
 
 #main-header h1 {
     font-size: 2.5rem;
-    color: #34495e;
+    color: var(--heading-color);
     font-weight: 700; /* Насыщенность шрифта */
     transition: transform 1.5s ease-in-out; /* Плавность анимации */
 }
@@ -42,7 +50,7 @@ body {
 
 /* Общие стили для секций */
 section {
-    background: #ffffff;
+    background: var(--fon-color);
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -51,7 +59,7 @@ section {
 section h2 {
     margin-bottom: 20px;
     font-size: 1.5rem;
-    color: #34495e;
+    color: var(--heading-color);
 }
 
 /* Flexbox внутри элементов формы */
@@ -62,7 +70,7 @@ section h2 {
 }
 
 .form-group:first-child label {
-   color: #942929;
+   color: var(--highlighting_color);
 }
 
 .form-group label {
@@ -84,16 +92,16 @@ section h2 {
 }
 
 @keyframes example {
-    from {background-color: #942929;}
-    to {background-color: #27ae60;}
+    from {background-color: var(--highlighting_color);}
+    to {background-color: var(--primary-color);}
 }
 
 /* Кнопка отправки */
 .btn-submit {
     width: 100%;
     padding: 12px;
-    background-color: #2ecc71;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--fon-color);
     border: none;
     font-size: 1.1rem;
     cursor: pointer;
@@ -109,7 +117,7 @@ display: none;
 }
 
 .btn-submit:hover {
-    background-color: #27ae60; /* Потемнение при наведении */
+    background-color: var(--primary-color); /* Потемнение при наведении */
 }
 
 .btn-submit:hover + p {
@@ -127,7 +135,7 @@ display: none;
 }
 
 .history-item {
-    background: #fdfdfd;
+    background: var(--fon-color);
     border: 1px solid #eef2f5;
     padding: 15px;
     margin-bottom: 15px;
@@ -137,7 +145,7 @@ display: none;
 .history-currency-badge {
     top: 10px;
     right: 15px;
-    background: #e1f5fe;
+    background: var(--fon-color);
     color: #0288d1;
     padding: 2px 8px;
     border-radius: 12px;
@@ -146,7 +154,7 @@ display: none;
 }
 
 .empty-message {
-    color: #aaa;
+    color: var(--empty_color);
     text-align: center;
     font-style: italic;
 }
@@ -160,7 +168,7 @@ footer {
 }
 
 footer a {
-    color: #2ecc71;
+    color: var(--primary-color);
     text-decoration: none; /* Убираем подчеркивание у ссылки */
 }
 
