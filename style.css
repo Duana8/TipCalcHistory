@@ -1,9 +1,9 @@
 :root{
     --primary-color: #27ae60;
     --heading-color: #34495e;
-    --fon-color: #ffffff;
-    --highlighting_color: #942929;
-    --empty_color: #ccc;
+    --bg-color: #ffffff;
+    --highlighting-color: #942929;
+    --empty-color: #ccc;
 }
 
 * {
@@ -70,7 +70,7 @@ section h2 {
 }
 
 .form-group:first-child label {
-   color: var(--highlighting_color);
+   color: var(--highlighting-color);
 }
 
 .form-group label {
@@ -92,7 +92,7 @@ section h2 {
 }
 
 @keyframes example {
-    from {background-color: var(--highlighting_color);}
+    from {background-color: var(--highlighting-color);}
     to {background-color: var(--primary-color);}
 }
 
@@ -154,7 +154,7 @@ display: none;
 }
 
 .empty-message {
-    color: var(--empty_color);
+    color: var(--empty-color);
     text-align: center;
     font-style: italic;
 }
