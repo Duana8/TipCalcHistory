@@ -1,3 +1,21 @@
+customElements.define('history-item', class extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+        
+        shadow.innerHTML = `
+            <style>
+                p { 
+                    margin: 8px 0; 
+                    font-weight: 700;
+                    color: #4a148c;
+                }
+            </style>
+            <p><slot></slot></p>
+        `;
+    }
+});
+
 const form = document.getElementById('tip-form');
 const billInput = document.getElementById('bill-amount');
 const tipSelect = document.getElementById('tip-percentage');
@@ -27,6 +45,6 @@ form.addEventListener('submit', function(event) {
         })
     ]).then(() => {
         const historyList = document.getElementById('history-list');
-        historyList.innerHTML += '<p>Заказ на ' + bill + ' — чаевые ' + tip + '</p>';
+        historyList.innerHTML += `<history-item>Заказ на ${bill} — чаевые ${tip}</history-item>`;
     });
 });
