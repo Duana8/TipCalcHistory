@@ -1,3 +1,14 @@
+customElements.define('history-item', class extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+        
+        shadow.innerHTML = `
+            <p><slot></slot></p>
+        `;
+    }
+});
+
 const form = document.getElementById('tip-form');
 const billInput = document.getElementById('bill-amount');
 const tipSelect = document.getElementById('tip-percentage');
@@ -16,16 +27,12 @@ form.addEventListener('submit', function(event) {
     let tip = Math.round((bill * percent),0);
     
     // Добавление строчку в историю
-<<<<<<< HEAD
     history.classList.remove('hidden');
     empty_mes.classList.add('hidden');
-=======
         Promise.all([
         (() => { history.classList.remove('hidden'); })(),
         (() => { empty_mes.classList.add('hidden'); })()
     ])
-    
->>>>>>> 5321ad9 (feat: implement custom elements, event loop, shadow DOM)
     const historyList = document.getElementById('history-list');
     historyList.innerHTML += '<p>Заказ на ' + bill + ' — чаевые ' + tip + '</p>';
 });
