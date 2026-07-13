@@ -1,20 +1,25 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Отступы прячутся внутрь заданной ширины */
+    box-sizing: border-box;
+    /* Отступы прячутся внутрь заданной ширины */
 }
 
 /* Настройки текста и шрифтов для всего документа */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6; /* Высота строки */
-    background-color: #fdfdfd; /* Цвет фона */
-    color: #27ae60; /* Цвет текста*/
+    line-height: 1.6;
+    /* Высота строки */
+    background-color: #fdfdfd;
+    /* Цвет фона */
+    color: #27ae60;
+    /* Цвет текста*/
 }
 
 /* Шапка сайта */
 #main-header {
-    text-align: center; /* Выравнивание текста */
+    text-align: center;
+    /* Выравнивание текста */
     padding: 10px 10px;
     background-color: #ffffff;
     perspective: 400px;
@@ -23,21 +28,26 @@ body {
 #main-header h1 {
     font-size: 2.5rem;
     color: #34495e;
-    font-weight: 700; /* Насыщенность шрифта */
-    transition: transform 1.5s ease-in-out; /* Плавность анимации */
+    font-weight: 700;
+    /* Насыщенность шрифта */
+    transition: transform 1.5s ease-in-out;
+    /* Плавность анимации */
 }
 
 #main-header h1:hover {
-    transform: rotateY(360deg); /* Поворот на полный оборот */
+    transform: rotateY(360deg);
+    /* Поворот на полный оборот */
 }
 
 /*  CSS Grid для главного контейнера */
 .container {
     max-width: 1000px;
-    margin: 0 auto; /* Центрирование блока по горизонтали */
+    margin: 0 auto;
+    /* Центрирование блока по горизонтали */
     display: grid;
-    grid-template-columns: 1fr 2fr; /* Две равные колонки */
-    gap: 30px; /* Отступы между колонками сетки */
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    /* Отступы между колонками сетки */
 }
 
 /* Общие стили для секций */
@@ -57,12 +67,14 @@ section h2 {
 /* Flexbox внутри элементов формы */
 .form-group {
     display: flex;
-    flex-direction: column; /* Элементы (label и input) выстраиваются вертикально */
-    margin-bottom: 15px; /* Внешний отступ снизу */
+    flex-direction: column;
+    /* Элементы (label и input) выстраиваются вертикально */
+    margin-bottom: 15px;
+    /* Внешний отступ снизу */
 }
 
 .form-group:first-child label {
-   color: #942929;
+    color: #942929;
 }
 
 .form-group label {
@@ -71,8 +83,10 @@ section h2 {
     font-size: 0.9rem;
 }
 
-.form-group input, .form-group select {
-    padding: 10px; /* Внутренние отступы */
+.form-group input,
+.form-group select {
+    padding: 10px;
+    /* Внутренние отступы */
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
@@ -84,8 +98,13 @@ section h2 {
 }
 
 @keyframes example {
-    from {background-color: #942929;}
-    to {background-color: #27ae60;}
+    from {
+        background-color: #942929;
+    }
+
+    to {
+        background-color: #27ae60;
+    }
 }
 
 /* Кнопка отправки */
@@ -104,26 +123,45 @@ section h2 {
     animation-timing-function: ease-out;
 }
 
-.btn-submit + p {
-display: none; 
+.btn-submit+p {
+    display: none;
 }
 
-.btn-submit:hover {
-    background-color: #27ae60; /* Потемнение при наведении */
+.btn-submit:hover,
+.btn-order:hover {
+    background-color: #27ae60;
+    /* Потемнение при наведении */
 }
 
-.btn-submit:hover + p {
-  display: block;
+.btn-submit:hover+p {
+    display: block;
 }
 
-.btn-submit::after{
-  content: " ⮜";
-  opacity: 0;
-  transition: 0.3s;
+.btn-submit::after {
+    content: " ⮜";
+    opacity: 0;
+    transition: 0.3s;
 }
 
 .btn-submit:hover::after {
-  opacity: 1;
+    opacity: 1;
+}
+
+/* Кнопка отправки */
+.btn-order {
+    padding: 3.5px 3.5px;
+    background-color: #2ecc71;
+    font-size: 1.1rem;
+    cursor: pointer;
+    animation-name: example;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-timing-function: ease-out;
+}
+
+.history-section {
+    grid-column: span 3;
 }
 
 .history-item {
@@ -151,6 +189,21 @@ display: none;
     font-style: italic;
 }
 
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
 /* Подвал */
 footer {
     text-align: center;
@@ -161,11 +214,13 @@ footer {
 
 footer a {
     color: #2ecc71;
-    text-decoration: none; /* Убираем подчеркивание у ссылки */
+    text-decoration: none;
+    /* Убираем подчеркивание у ссылки */
 }
 
 footer a:hover {
-    text-decoration: underline; /* Подчеркивание при наведении */
+    text-decoration: underline;
+    /* Подчеркивание при наведении */
 }
 
 /* Адаптивность для мобилок с помощью */
