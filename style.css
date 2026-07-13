@@ -1,80 +1,78 @@
+:root{
+    --primary-color: #27ae60;
+    --heading-color: #34495e;
+    --bg-color: #ffffff;
+    --highlighting-color: #942929;
+    --empty-color: #ccc;
+    --history-color: #eef2f5;
+    --section-color: rgba(0, 0, 0, 0.05);
+}
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    /* Отступы прячутся внутрь заданной ширины */
+    box-sizing: border-box; /* Отступы прячутся внутрь заданной ширины */
 }
 
 /* Настройки текста и шрифтов для всего документа */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    /* Высота строки */
-    background-color: #fdfdfd;
-    /* Цвет фона */
-    color: #27ae60;
-    /* Цвет текста*/
+    line-height: 1.6; /* Высота строки */
+    background-color: var(--bg-color); /* Цвет фона */
+    color: var(--primary-color); /* Цвет текста*/
 }
 
 /* Шапка сайта */
 #main-header {
-    text-align: center;
-    /* Выравнивание текста */
+    text-align: center; /* Выравнивание текста */
     padding: 10px 10px;
-    background-color: #ffffff;
+    background-color: var(--bg-color);
     perspective: 400px;
 }
 
 #main-header h1 {
     font-size: 2.5rem;
-    color: #34495e;
-    font-weight: 700;
-    /* Насыщенность шрифта */
-    transition: transform 1.5s ease-in-out;
-    /* Плавность анимации */
+    color: var(--heading-color);
+    font-weight: 700; /* Насыщенность шрифта */
+    transition: transform 1.5s ease-in-out; /* Плавность анимации */
 }
 
 #main-header h1:hover {
-    transform: rotateY(360deg);
-    /* Поворот на полный оборот */
+    transform: rotateY(360deg); /* Поворот на полный оборот */
 }
 
 /*  CSS Grid для главного контейнера */
 .container {
     max-width: 1000px;
-    margin: 0 auto;
-    /* Центрирование блока по горизонтали */
+    margin: 0 auto; /* Центрирование блока по горизонтали */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-    /* Отступы между колонками сетки */
+    grid-template-columns: 1fr 2fr; /* Две равные колонки */
+    gap: 30px; /* Отступы между колонками сетки */
 }
 
 /* Общие стили для секций */
 section {
-    background: #ffffff;
+    background: var(--bg-color);
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px var(--section-color);
 }
 
 section h2 {
     margin-bottom: 20px;
     font-size: 1.5rem;
-    color: #34495e;
+    color: var(--heading-color);
 }
 
 /* Flexbox внутри элементов формы */
 .form-group {
     display: flex;
-    flex-direction: column;
-    /* Элементы (label и input) выстраиваются вертикально */
-    margin-bottom: 15px;
-    /* Внешний отступ снизу */
+    flex-direction: column; /* Элементы (label и input) выстраиваются вертикально */
+    margin-bottom: 15px; /* Внешний отступ снизу */
 }
 
 .form-group:first-child label {
-    color: #942929;
+   color: var(--highlighting-color);
 }
 
 .form-group label {
@@ -83,11 +81,9 @@ section h2 {
     font-size: 0.9rem;
 }
 
-.form-group input,
-.form-group select {
-    padding: 10px;
-    /* Внутренние отступы */
-    border: 1px solid #ccc;
+.form-group input, .form-group select {
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid var(--empty-color);
     border-radius: 4px;
     font-size: 1rem;
 }
@@ -98,21 +94,16 @@ section h2 {
 }
 
 @keyframes example {
-    from {
-        background-color: #942929;
-    }
-
-    to {
-        background-color: #27ae60;
-    }
+    from {background-color: var(--highlighting-color);}
+    to {background-color: var(--primary-color);}
 }
 
 /* Кнопка отправки */
 .btn-submit {
     width: 100%;
     padding: 12px;
-    background-color: #2ecc71;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
     border: none;
     font-size: 1.1rem;
     cursor: pointer;
@@ -123,34 +114,32 @@ section h2 {
     animation-timing-function: ease-out;
 }
 
-.btn-submit+p {
-    display: none;
+.btn-submit + p {
+display: none; 
 }
 
-.btn-submit:hover,
-.btn-order:hover {
-    background-color: #27ae60;
-    /* Потемнение при наведении */
+.btn-submit:hover {
+    background-color: var(--primary-color); /* Потемнение при наведении */
 }
 
-.btn-submit:hover+p {
-    display: block;
+.btn-submit:hover + p {
+  display: block;
 }
 
-.btn-submit::after {
-    content: " ⮜";
-    opacity: 0;
-    transition: 0.3s;
+.btn-submit::after{
+  content: " ⮜";
+  opacity: 0;
+  transition: 0.3s;
 }
 
 .btn-submit:hover::after {
-    opacity: 1;
+  opacity: 1;
 }
 
-/* Кнопка отправки */
+/* Кнопка заказа */
 .btn-order {
     padding: 3.5px 3.5px;
-    background-color: #2ecc71;
+    background-color: var(--primary-color);
     font-size: 1.1rem;
     cursor: pointer;
     animation-name: example;
@@ -165,8 +154,8 @@ section h2 {
 }
 
 .history-item {
-    background: #fdfdfd;
-    border: 1px solid #eef2f5;
+    background: var(--bg-color);
+    border: 1px solid var(--history-color);
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 6px;
@@ -175,8 +164,7 @@ section h2 {
 .history-currency-badge {
     top: 10px;
     right: 15px;
-    background: #e1f5fe;
-    color: #0288d1;
+    background: var(--bg-color);
     padding: 2px 8px;
     border-radius: 12px;
     font-size: 0.8rem;
@@ -184,7 +172,7 @@ section h2 {
 }
 
 .empty-message {
-    color: #aaa;
+    color: var(--empty-color);
     text-align: center;
     font-style: italic;
 }
@@ -213,14 +201,12 @@ footer {
 }
 
 footer a {
-    color: #2ecc71;
-    text-decoration: none;
-    /* Убираем подчеркивание у ссылки */
+    color: var(--primary-color);
+    text-decoration: none; /* Убираем подчеркивание у ссылки */
 }
 
 footer a:hover {
-    text-decoration: underline;
-    /* Подчеркивание при наведении */
+    text-decoration: underline; /* Подчеркивание при наведении */
 }
 
 /* Адаптивность для мобилок с помощью */
