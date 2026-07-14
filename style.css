@@ -6,6 +6,7 @@
     --empty-color: #ccc;
     --history-color: #eef2f5;
     --section-color: rgba(0, 0, 0, 0.05);
+    --paragraph-color: #4a148c;
 }
 
 * {
@@ -13,12 +14,6 @@
     padding: 0;
     box-sizing: border-box;
     /* Отступы прячутся внутрь заданной ширины */
-}
-
-p {
-    margin: 8px 0;
-    font-weight: 700;
-    color: #4a148c;
 }
 
 /* Настройки текста и шрифтов для всего документа */
