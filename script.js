@@ -15,9 +15,23 @@ form.addEventListener('submit', function(event) {
     // Подсчет
     let tip = Math.round((bill * percent),0);
     
+    console.log('1. Синхронный код: Начало обработчика');
+    
     // Добавление строчку в историю
     history.classList.remove('hidden');
     empty_mes.classList.add('hidden');
-    const historyList = document.getElementById('history-list');
-    historyList.innerHTML += '<p>Заказ на ' + bill + ' — чаевые ' + tip + '</p>';
+
+    setTimeout(() => {
+        console.log('4. Макрозадача (setTimeout): Добавляем заказ в историю на странице');
+        
+        const historyList = document.getElementById('history-list');
+        historyList.innerHTML += '<p>Заказ на ' + bill + ' — чаевые ' + tip + '</p>';
+    }, 3000);
+
+    Promise.resolve('Данные подготовлены для истории!')
+        .then((message) => {
+            console.log('3. Микрозадача (Promise.then): ' + message);
+        });
+
+    console.log('2. Синхронный код: Конец обработчика');
 });
