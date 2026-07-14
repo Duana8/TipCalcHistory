@@ -1,3 +1,14 @@
+customElements.define('history-item', class extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+        
+        shadow.innerHTML = `
+            <p><slot></slot></p>
+        `;
+    }
+});
+
 // Валюта
 const currency = new Set();
 currency.add("₽");
@@ -19,7 +30,7 @@ if (menuList) {
         const li = document.createElement('li');
         li.classList.add('item');
 
-        let result = `${dish} — ${price} ${rub}`;
+        let result = `${dish} — ${price} ${currencySymbol}`;
         li.textContent = result + ' ';
         menuList.appendChild(li);
     }
@@ -45,6 +56,10 @@ form.addEventListener('submit', function(event) {
     // Добавление строчку в историю
     history.classList.remove('hidden');
     empty_mes.classList.add('hidden');
+        Promise.all([
+        (() => { history.classList.remove('hidden'); })(),
+        (() => { empty_mes.classList.add('hidden'); })()
+    ])
     const historyList = document.getElementById('history-list');
     historyList.innerHTML += '<p>Заказ на ' + bill + ' — чаевые ' + tip + '</p>';
 });
