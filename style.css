@@ -160,6 +160,21 @@ display: none;
     font-style: italic;
 }
 
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
 /* Подвал */
 footer {
     text-align: center;
