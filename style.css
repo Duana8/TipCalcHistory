@@ -46,7 +46,7 @@ body {
     max-width: 1000px;
     margin: 0 auto; /* Центрирование блока по горизонтали */
     display: grid;
-    grid-template-columns: 1fr 2fr; /* Две равные колонки */
+    grid-template-columns: 1fr 1fr 1f; /* Две равные колонки */
     gap: 30px; /* Отступы между колонками сетки */
 }
 
@@ -136,6 +136,23 @@ display: none;
   opacity: 1;
 }
 
+/* Кнопка заказа */
+.btn-order {
+    padding: 3.5px 3.5px;
+    background-color: var(--primary-color);
+    font-size: 1.1rem;
+    cursor: pointer;
+    animation-name: example;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-timing-function: ease-out;
+}
+
+.history-section {
+    grid-column: span 3;
+}
+
 .history-item {
     background: var(--bg-color);
     border: 1px solid var(--history-color);
@@ -158,6 +175,21 @@ display: none;
     color: var(--empty-color);
     text-align: center;
     font-style: italic;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
 }
 
 /* Подвал */
