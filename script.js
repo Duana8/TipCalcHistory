@@ -10,7 +10,7 @@ const menu = new Map([
     ['Капучино', 180],
     ['Круассан', 120]
 ]);
-const [rub] = currency;
+const [currencySymbol] = currency;
 
 const menuList = document.getElementById('menu-list');
 
