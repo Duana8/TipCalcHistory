@@ -1,3 +1,48 @@
+customElements.define('history-item', class extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+        
+        shadow.innerHTML = `
+            <style>
+                :host {
+                    margin: 8px 0;
+                    font-weight: 700;
+                    color: var(--paragraph-color); 
+                }
+            </style>
+            <p><slot></slot></p>
+        `;
+    }
+});
+
+// Валюта
+const currency = new Set();
+currency.add("₽");
+currency.add("$");
+currency.add("€");
+
+// Меню
+const menu = new Map([
+    ['Кофе', 150],
+    ['Капучино', 180],
+    ['Круассан', 120]
+]);
+const [currencySymbol] = currency;
+
+const menuList = document.getElementById('menu-list');
+
+if (menuList) {
+    for (let [dish, price] of menu) {
+        const li = document.createElement('li');
+        li.classList.add('item');
+
+        let result = `${dish} — ${price} ${currencySymbol}`;
+        li.textContent = result + ' ';
+        menuList.appendChild(li);
+    }
+}
+
 const form = document.getElementById('tip-form');
 const billInput = document.getElementById('bill-amount');
 const tipSelect = document.getElementById('tip-percentage');
