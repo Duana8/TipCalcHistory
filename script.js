@@ -4,6 +4,13 @@ customElements.define('history-item', class extends HTMLElement {
         const shadow = this.attachShadow({ mode: 'open' });
         
         shadow.innerHTML = `
+            <style>
+                :host {
+                    margin: 8px 0;
+                    font-weight: 700;
+                    color: var(--paragraph-color); 
+                }
+            </style>
             <p><slot></slot></p>
         `;
     }
@@ -61,5 +68,5 @@ form.addEventListener('submit', function(event) {
         (() => { empty_mes.classList.add('hidden'); })()
     ])
     const historyList = document.getElementById('history-list');
-    historyList.innerHTML += '<p>Заказ на ' + bill + ' — чаевые ' + tip + '</p>';
+    historyList.innerHTML += '<history-item>Заказ на ' + bill + ' — чаевые ' + tip + '</history-item>';
 });
