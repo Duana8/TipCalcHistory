@@ -101,7 +101,7 @@ form.addEventListener('submit', function(event) {
 
     setTimeout(() => {
         console.log('4. Макрозадача (setTimeout): Добавляем заказ в историю на странице');
-        history.innerHTML += '<p>Заказ на ' + bill + ' — чаевые ' + tip + '</p>';
+        history.innerHTML += '<history-item>Заказ на ' + bill + ' — чаевые ' + tip + '</history-item>';
     }, 3000);
 
     Promise.resolve('Данные подготовлены для истории!')
