@@ -158,6 +158,21 @@ section h2 {
     opacity: 1;
 }
 
+/* Кнопка отправки */
+.btn-order {
+    padding: 3px 3px;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    animation-name: example;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-timing-function: ease-out;
+}
+
 .history-item {
     background: var(--bg-color);
     border: 1px solid var(--history-color);
