@@ -1,0 +1,47 @@
+<section class="calculator-section">
+    <h2>Расчет чаевых</h2>
+    <form id="tip-form">
+        <div class="form-group">
+            <label for="bill-amount">Сумма счета:</label>
+            <input name="input-bill-amount" type="number" id="bill-amount" required min="10"
+                [(ngModel)]="tipService.bill">
+        </div>
+
+        <div class="form-group">
+            <label for="tip-percentage">Процент чаевых:</label>
+            <select name="select-tip-percentage" id="tip-percentage" [(ngModel)]="tipService.percent">
+                <option [value]="0.0">0%</option>
+                <option [value]="0.05">5%</option>
+                <option [value]="0.10" selected>10%</option>
+                <option [value]="0.15">15%</option>
+                <option [value]="0.20">20%</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="currency">Валюта:</label>
+            <select name="select-currency" id="currency" [(ngModel)]="tipService.currency">
+                @for (item of currencies; track $index){
+                <option [value]="item.value">{{item.name}}</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-submit" (click)="tipService.calcTip()">Рассчитать</button>
+            <p>Калькулятор чаевых: рассчитать</p>
+        </div>
+    </form>
+</section>
+<section class="history-section">
+    <h2>История расчетов</h2>
+    <div id="history-list" class="history-list">
+        @if (tipService.history().length ===0 ){
+        <p id="empty-message" class="empty-message">История пока пуста...</p>
+        }
+        @if (tipService.history().length >0 ){
+        @for (item of tipService.history(); track $index)
+        { <p> {{ item.bill }} — {{ item.tip }} </p> }
+        }
+    </div>
+</section>

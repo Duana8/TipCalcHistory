@@ -1,1 +1,110 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #27ae60;
+    --heading-color: #34495e;
+    --bg-color: #ffffff;
+    --highlighting-color: #942929;
+    --empty-color: #ccc;
+    --history-color: #eef2f5;
+    --section-color: rgba(0, 0, 0, 0.05);
+    --paragraph-color: #4a148c;
+    --bg-tr-hover: rgba(0, 0, 0, 0.08);
+    --bg-tr-even: rgba(0, 0, 0, 0.04); 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Отступы прячутся внутрь заданной ширины */
+}
+
+/* Настройки текста и шрифтов для всего документа */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    /* Высота строки */
+    background-color: var(--bg-color);
+    /* Цвет фона */
+    color: var(--primary-color);
+    /* Цвет текста*/
+}
+
+/* Шапка сайта */
+#main-header {
+    text-align: center;
+    /* Выравнивание текста */
+    padding: 10px 10px;
+    background-color: var(--bg-color);
+    perspective: 400px;
+}
+
+#main-header h1 {
+    font-size: 2.5rem;
+    color: var(--heading-color);
+    font-weight: 700;
+    /* Насыщенность шрифта */
+    //transition: transform 1.5s ease-in-out;
+    /* Плавность анимации */
+}
+
+#main-header h1:hover {
+    transform: rotateY(360deg);
+    /* Поворот на полный оборот */
+}
+
+/*  CSS Grid для главного контейнера */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    /* Центрирование блока по горизонтали */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* Две равные колонки */
+    gap: 30px;
+    /* Отступы между колонками сетки */
+}
+
+/* Общие стили для секций */
+section {
+    background: var(--bg-color);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--section-color);
+}
+
+section h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--heading-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+/* Подвал */
+footer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    /* Убираем подчеркивание у ссылки */
+}
+
+footer a:hover {
+    text-decoration: underline;
+    /* Подчеркивание при наведении */
+}
+
+/* Адаптивность для мобилок с помощью */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}

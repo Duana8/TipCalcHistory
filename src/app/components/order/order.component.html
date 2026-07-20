@@ -1,0 +1,27 @@
+<section class="order-section">
+  <h2>Информация о заказе</h2>
+  <div class="form-group">
+    <table class="table">
+      <thead></thead>
+      <tbody>
+        @if (orderService.orderList().length>0) {
+        @for (item of orderService.orderList(); track $index;){
+        <tr>
+          <td>
+            <img [src]="item.image" [alt]="item.dish" class="image-container" />
+          </td>
+          <td> {{item.dish}}</td>
+          <td>{{item.price | currency:'RUB':'symbol':'1.0-0' }}</td>
+          <td>
+            <button type="button" class="btn-order" (click)="orderService.removeFromOrder($index); 
+                    tipService.downBillAmount(item.price)">
+              x
+            </button>
+          </td>
+        </tr>
+        }
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
