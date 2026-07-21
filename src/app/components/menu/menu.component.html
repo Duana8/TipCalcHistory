@@ -12,10 +12,7 @@
  <td> {{item.dish}}</td>
   <td>{{item.price | currency:'RUB':'symbol':'1.0-0' }}</td>
   <td>
-     <button type="button" class="btn-order" 
-                    (click)="orderService.addToOrder(item.image, item.dish, item.price); 
-                            tipService.upBillAmount(item.price)">
-                    +
+     <button type="button" class="btn-order" (click)="orderService.addToOrder(item.image, item.dish, item.price); tipService.upBillAmount(item.price)">+
     </button>
   </td>
     </tr>
