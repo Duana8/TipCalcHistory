@@ -1,17 +1,18 @@
-import { Component, inject, OnInit } from '@angular/core';
 import { TipCalcService } from '../../services/tip-calc/tip-calc.service';
-import { FormsModule } from '@angular/forms';
 import { TipEmojiPipe } from './tip-emoji.pipe';
+import { Component, inject, OnInit, effect } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tip-calc',
   standalone: true,
-  imports: [FormsModule, TipEmojiPipe],
+  imports: [ReactiveFormsModule, TipEmojiPipe],
   templateUrl: './tip-calc.component.html',
   styleUrls: ['./tip-calc.component.scss'],
 })
-export class TipCalcComponent {
+export class TipCalcComponent implements OnInit {
   protected tipService = inject(TipCalcService);
+  private readonly data = inject(FormBuilder);
 
   // + api валюты
   currencies = [
@@ -19,9 +20,33 @@ export class TipCalcComponent {
     { name: '$', value: 5 },
     { name: '€', value: 8 },
   ];
-  currency: string = this.currencies[0].name;
+
+  protected tipForm: FormGroup = this.data.group({
+    bill: [this.tipService.bill, [Validators.required, Validators.min(10)]],
+    precent: [this.tipService.precent],
+    currency: [this.tipService.currency],
+  });
+
+  constructor() {
+    // Следим за изменениями bill в сервисе
+    effect(() => {
+      this.tipForm.patchValue({ bill: this.tipService.bill }, { emitEvent: false });
+
+      if (this.tipForm.valid) {
+        this.tipService.calcTip();
+      }
+    });
+  }
 
   ngOnInit() {
-    this.tipService.currency = 2;
+    // Авторасчет при изменениях в форме
+    this.tipForm.valueChanges.subscribe((values) => {
+      this.tipService.precent = Number(values.precent) || 10;
+      this.tipService.currency = Number(values.currency) || 2;
+
+      if (this.tipForm.valid) {
+        this.tipService.calcTip();
+      }
+    });
   }
 }

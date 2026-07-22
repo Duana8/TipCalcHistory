@@ -10,9 +10,9 @@ export interface TipHistoryItem {
 })
 export class TipCalcService {
   public bill: number = 0;
-  public percent: number = 0.1;
+  public precent: number = 0.1;
   public tip: number = 0;
-  public currency: number = 0;
+  public currency: number = 2;
   public history = signal<TipHistoryItem[]>([]);
 
   upBillAmount(price: number): void {
@@ -24,8 +24,8 @@ export class TipCalcService {
   }
 
   calcTip(): void {
-    this.tip = Math.round(this.bill * this.percent * Number(this.currency));
-    console.log('bill, percent, tip, currency', this.bill, this.percent, this.tip, this.currency);
+    this.tip = Math.round(this.bill * this.precent * Number(this.currency));
+    console.log('bill, percent, tip, currency', this.bill, this.precent, this.tip, this.currency);
 
     console.log('1. Синхронный код: Начало обработчика');
 
@@ -40,7 +40,6 @@ export class TipCalcService {
         },
       ]);
     }, 3000);
-    //  currency: this.currency
 
     Promise.resolve('Данные подготовлены для истории!').then((message) => {
       console.log('3. Микрозадача (Promise.then): ' + message);
