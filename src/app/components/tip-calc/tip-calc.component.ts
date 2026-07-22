@@ -1,11 +1,12 @@
 import { Component, inject } from "@angular/core";
 import { TipCalcService } from "../../services/tip-calc/tip-calc.service";
 import { FormsModule } from "@angular/forms";
+import { AsyncPipe } from "@angular/common";
 
 @Component({
     selector:'app-tip-calc',
     standalone: true,
-    imports: [FormsModule],
+    imports: [FormsModule, AsyncPipe],
     templateUrl: './tip-calc.component.html',
     styleUrls: ['./tip-calc.component.scss']
 })

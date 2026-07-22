@@ -35,13 +35,20 @@
 </section>
 <section class="history-section">
     <h2>История расчетов</h2>
-    <div id="history-list" class="history-list">
-        @if (tipService.history().length ===0 ){
-        <p id="empty-message" class="empty-message">История пока пуста...</p>
+        <div id="history-list" class="history-list">
+        @if (tipService.history$ | async; as history) {
+            @if (history.length === 0) {
+            <p id="empty-message" class="empty-message">История пока пуста...</p>
+                }
+
+            @if (history.length > 0) {
+
+            @for (item of history; track $index) { 
+                <p> {{ item.bill }} — {{ item.tip }} </p> 
+                }
+            }
+        } @else {
+            <p>Загрузка истории...</p>
         }
-        @if (tipService.history().length >0 ){
-        @for (item of tipService.history(); track $index)
-        { <p> {{ item.bill }} — {{ item.tip }} </p> }
-        }
-    </div>
+        </div>
 </section>
