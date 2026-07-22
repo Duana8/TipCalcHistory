@@ -1,12 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TipCalcService } from '../../services/tip-calc/tip-calc.service';
 import { FormsModule } from '@angular/forms';
 import { TipEmojiPipe } from './tip-emoji.pipe';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-tip-calc',
   standalone: true,
-  imports: [FormsModule, TipEmojiPipe],
+  imports: [FormsModule, AsyncPipe, TipEmojiPipe],
   templateUrl: './tip-calc.component.html',
   styleUrls: ['./tip-calc.component.scss'],
 })

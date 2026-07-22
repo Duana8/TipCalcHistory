@@ -1,4 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 export interface TipHistoryItem {
   bill: number;
@@ -13,7 +15,9 @@ export class TipCalcService {
   public percent: number = 0.1;
   public tip: number = 0;
   public currency: number = 0;
-  public history = signal<TipHistoryItem[]>([]);
+
+  // поток
+  public history$ = new BehaviorSubject<TipHistoryItem[]>([]);
 
   upBillAmount(price: number): void {
     this.bill += price;
@@ -29,22 +33,26 @@ export class TipCalcService {
 
     console.log('1. Синхронный код: Начало обработчика');
 
-    setTimeout(() => {
-      console.log('4. Макрозадача (setTimeout): Добавляем заказ в историю на странице');
+    // данные для отправки в поток
+    const historyItem = {
+      bill: this.bill,
+      tip: this.tip,
+    };
 
-      this.history.update((list) => [
-        ...list,
-        {
-          bill: this.bill,
-          tip: this.tip,
+    // поток
+    of(historyItem)
+      .pipe(delay(3000))
+      .subscribe({
+        next: (item) => {
+          console.log('3. RxJS Асинхронная задача: Добавляем заказ в историю');
+          const currentList = this.history$.getValue();
+          this.history$.next([...currentList, item]);
         },
-      ]);
-    }, 3000);
-    //  currency: this.currency
+        complete: () => {
+          console.log('4. RxJS Поток завершен');
+        },
+      });
 
-    Promise.resolve('Данные подготовлены для истории!').then((message) => {
-      console.log('3. Микрозадача (Promise.then): ' + message);
-    });
     console.log('2. Синхронный код: Конец обработчика');
   }
 }
