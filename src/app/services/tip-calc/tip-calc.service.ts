@@ -13,7 +13,7 @@ export class TipCalcService {
   public bill: number =0;
   public percent: number= 0.10;
   public tip: number=0;
-  public currency:number=0;
+  public currency:number=2;
   public history = signal<TipHistoryItem[]>([]);
 
    upBillAmount(price: number): void{
@@ -33,14 +33,13 @@ export class TipCalcService {
     setTimeout(() => {
         console.log('4. Макрозадача (setTimeout): Добавляем заказ в историю на странице');
 
-this.history.update(list=>[...list,
-  {
-bill: this.bill,
-tip: this.tip
-  }
-])
-;}, 3000);
-       //  currency: this.currency
+    this.history.update(list=>[...list,
+      {
+    bill: this.bill,
+    tip: this.tip
+      }
+    ])
+    ;}, 3000);
 
     Promise.resolve('Данные подготовлены для истории!')
         .then((message) => {

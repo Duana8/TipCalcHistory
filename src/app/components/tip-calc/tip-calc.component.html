@@ -1,18 +1,18 @@
 <section class="calculator-section">
     <h2>Расчет чаевых</h2>
-    <form id="tip-form">
+    <form id="tip-form" [formGroup]="tipForm">
         <div class="form-group">
             <label for="bill-amount">Сумма счета:</label>
             <input name="input-bill-amount" type="number" id="bill-amount" required min="10"
-                [(ngModel)]="tipService.bill">
+                formControlName="bill" readonly>
         </div>
 
         <div class="form-group">
             <label for="tip-percentage">Процент чаевых:</label>
-            <select name="select-tip-percentage" id="tip-percentage" [(ngModel)]="tipService.percent">
+            <select name="select-tip-percentage" id="tip-percentage" formControlName="precent">
                 <option [value]="0.0">0%</option>
                 <option [value]="0.05">5%</option>
-                <option [value]="0.10" selected>10%</option>
+                <option [value]="0.10">10%</option>
                 <option [value]="0.15">15%</option>
                 <option [value]="0.20">20%</option>
             </select>
@@ -20,16 +20,11 @@
 
         <div class="form-group">
             <label for="currency">Валюта:</label>
-            <select name="select-currency" id="currency" [(ngModel)]="tipService.currency">
+            <select name="select-currency" id="currency" formControlName="currency">
                 @for (item of currencies; track $index){
                 <option [value]="item.value">{{item.name}}</option>
                 }
             </select>
-        </div>
-
-        <div class="form-group">
-            <button type="submit" class="btn-submit" (click)="tipService.calcTip()">Рассчитать</button>
-            <p>Калькулятор чаевых: рассчитать</p>
         </div>
     </form>
 </section>
