@@ -33,15 +33,3 @@
         </div>
     </form>
 </section>
-<section class="history-section">
-    <h2>История расчетов</h2>
-    <div id="history-list" class="history-list">
-        @if (tipService.history().length ===0 ){
-        <p id="empty-message" class="empty-message">История пока пуста...</p>
-        }
-        @if (tipService.history().length >0 ){
-        @for (item of tipService.history(); track $index)
-        { <p> {{ item.bill }} — {{ item.tip }} </p> }
-        }
-    </div>
-</section>

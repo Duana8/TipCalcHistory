@@ -1,11 +1,9 @@
 import { Routes } from '@angular/router';
-import { MenuComponent } from './components/menu/menu.component';
-import { OrderComponent } from './components/order/order.component';
-import { TipCalcComponent } from './components/tip-calc/tip-calc.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo:'menu', pathMatch: 'full'},
-    {path: 'menu', component: MenuComponent},
-    {path: 'order', component: OrderComponent},
-    {path: 'calc', component: TipCalcComponent}
+    {path: '', redirectTo:'/main', pathMatch: 'full'},
+    {path: 'main', component: MainPageComponent},
+    {path: 'profile', component: ProfileComponent}
 ];
