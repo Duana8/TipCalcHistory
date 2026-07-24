@@ -1,78 +1,17 @@
-/* Flexbox внутри элементов формы */
+@use '../../../styles/mixins' as mix;
+
 .form-group {
-    display: flex;
-    flex-direction: column;
-    /* Элементы (label и input) выстраиваются вертикально */
-    margin-bottom: 15px;
-    /* Внешний отступ снизу */
-    max-height: 25rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.form-group:first-child label {
-    color: var(--highlighting-color);
-}
-
-.form-group label {
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.form-group input,
-.form-group select {
-    padding: 10px;
-    /* Внутренние отступы */
-    border: 1px solid var(--empty-color);
-    border-radius: 4px;
-    font-size: 1rem;
+    @include mix.form-group; 
 }
 
 .btn-order {
-    padding: 3px 3px;
-    background-color: var(--primary-color);
-    color: var(--bg-color);
-    border: none;
-    font-size: 1.1rem;
-    cursor: pointer;
-    animation-name: example;
-    animation-duration: 6s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate-reverse;
-    animation-timing-function: ease-out;
+    @include mix.animated-order-button;
 }
 
 .table {
-    width: 100%;
-    border-collapse: collapse; /* нет двойные рамки */
-    margin-top: 10px;
-
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid var(--empty-color);
-    }
-
-    th {
-        background-color: var(--primary-color);
-        color: var(--bg-color);
-        font-weight: 600;
-    }
-
-    tbody tr:nth-child(even) {
-        background-color: var(--bg-tr-even);
-    }
-
-    tbody tr:hover {
-        background-color: var(--bg-tr-hover);
-    }
+    @include mix.styled-table;
 }
 
 .image-container {
- width: 80px;
-height: 80px;
-object-fit: cover; /* отсутствие деформации */
-overflow: hidden; /* обрезка того, что может вылезть*/
-border-radius: 6px;
+    @include mix.image-container(80px);
 }
