@@ -4,22 +4,25 @@
     <table class="table">
       <thead></thead>
       <tbody>
-        @if (orderService.orderList().length>0) {
-        @for (item of orderService.orderList(); track $index;){
-        <tr>
-          <td>
-            <img [src]="item.image" [alt]="item.dish" class="image-container" />
-          </td>
-          <td> {{item.dish}}</td>
-          <td>{{item.price | currency:'RUB':'symbol':'1.0-0' }}</td>
-          <td>
-            <button type="button" class="btn-order" (click)="orderService.removeFromOrder($index); 
-                    tipService.downBillAmount(item.price)">
-              x
-            </button>
-          </td>
-        </tr>
-        }
+        @if (orderService.orderList().length > 0) {
+          @for (item of orderService.orderList(); track $index) {
+            <tr>
+              <td>
+                <img [src]="item.image" [alt]="item.dish" class="image-container" />
+              </td>
+              <td>{{ item.dish }}</td>
+              <td>{{ item.price | currency: 'RUB' : 'symbol' : '1.0-0' }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn-order"
+                  (click)="removeFromOrder($index, item.price)"
+                >
+                  x
+                </button>
+              </td>
+            </tr>
+          }
         }
       </tbody>
     </table>
