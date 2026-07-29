@@ -15,4 +15,9 @@ import { TipCalcService } from "../../services/tip-calc/tip-calc.service";
 export class MenuComponent {
     protected readonly orderService = inject(OrderService);
     protected readonly tipService = inject(TipCalcService);
+
+    protected addToOrder(item: { image: string; dish: string; price: number }): void {
+        this.orderService.addToOrder(item.image, item.dish, item.price);
+        this.tipService.upBillAmount(item.price);
+    }
 }
