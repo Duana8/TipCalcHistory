@@ -16,9 +16,8 @@
                 <button
                   type="button"
                   class="btn-order"
-                  (click)="
-                    orderService.removeFromOrder($index); tipService.downBillAmount(item.price)
-                  ">
+                  (click)="removeFromOrder($index, item.price)"
+                >
                   x
                 </button>
               </td>

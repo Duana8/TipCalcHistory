@@ -14,4 +14,9 @@ import { TipCalcService } from '../../services/tip-calc/tip-calc.service';
 export class OrderComponent {
   protected readonly orderService = inject(OrderService);
   protected readonly tipService = inject(TipCalcService);
+
+  protected removeFromOrder(index: number, price: number): void {
+    this.orderService.removeFromOrder(index);
+    this.tipService.downBillAmount(price);
+  }
 }
