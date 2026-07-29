@@ -4,8 +4,8 @@ import { OrderComponent } from './components/order/order.component';
 import { TipCalcComponent } from './components/tip-calc/tip-calc.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo:'menu', pathMatch: 'full'},
-    {path: 'menu', component: MenuComponent},
-    {path: 'order', component: OrderComponent},
-    {path: 'calc', component: TipCalcComponent}
+  { path: '', redirectTo: 'menu', pathMatch: 'full' },
+  { path: 'menu', component: MenuComponent },
+  { path: 'order', component: OrderComponent },
+  { path: 'calc', component: TipCalcComponent },
 ];
