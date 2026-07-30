@@ -30,8 +30,6 @@ export class TipCalcComponent implements OnInit {
   constructor() {
     // Следим за изменениями bill в сервисе
     effect(() => {
-      this.tipForm.patchValue({ bill: this.tipService.bill }, { emitEvent: false });
-
       if (this.tipForm.valid) {
         this.tipService.calcTip();
       }
