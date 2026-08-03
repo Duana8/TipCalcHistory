@@ -16,11 +16,9 @@
     <div class="form-group">
       <label for="tip-percentage">Процент чаевых:</label>
       <select name="select-tip-percentage" id="tip-percentage" formControlName="precent">
-        <option [ngValue]="0.0">0%</option>
-        <option [ngValue]="0.05">5%</option>
-        <option [ngValue]="0.1">10%</option>
-        <option [ngValue]="0.15">15%</option>
-        <option [ngValue]="0.2">20%</option>
+        @for (tip of percentages; track $index) {
+          <option [ngValue]="tip.value">{{ tip.name }}</option>
+        }
       </select>
     </div>
 
@@ -28,7 +26,7 @@
       <label for="currency">Валюта:</label>
       <select name="select-currency" id="currency" formControlName="currency">
         @for (item of currencies; track $index) {
-          <option [value]="item.value">{{ item.name }}</option>
+          <option [ngValue]="item.value">{{ item.name }}</option>
         }
       </select>
     </div>
