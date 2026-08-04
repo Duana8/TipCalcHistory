@@ -1,9 +1,15 @@
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TipCalcService } from '../../services/tip-calc/tip-calc.service';
 import { TipEmojiPipe } from './tip-emoji.pipe';
-import { Component, inject, OnInit, effect, OnDestroy, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, OnInit, effect, OnDestroy, DestroyRef } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+
+interface TipFormValue {
+  bill?: number;
+  precent?: number;
+  currency?: number;
+}
 
 @Component({
   selector: 'app-tip-calc',
@@ -15,6 +21,7 @@ import { debounceTime } from 'rxjs';
 export class TipCalcComponent implements OnInit, OnDestroy {
   protected tipService = inject(TipCalcService);
   private readonly data = inject(FormBuilder);
+  private destroyRef = inject(DestroyRef);
 
   // + api валюты
   currencies = [
@@ -36,22 +43,23 @@ export class TipCalcComponent implements OnInit, OnDestroy {
     currency: [this.tipService.currency()],
   });
 
-  private destroyRef = takeUntilDestroyed();
-
   constructor() {
     effect(() => {
-      this.tipForm.patchValue({ bill: this.tipService.bill(), emitEvent: false });
+      this.tipForm.patchValue({ bill: this.tipService.bill() }, { emitEvent: false });
     });
   }
 
   ngOnInit() {
-    this.tipForm.valueChanges.pipe(debounceTime(100), this.destroyRef).subscribe((values: any) => {
-      this.tipService.precent.set(values.precent ?? 0.1);
-      this.tipService.currency.set(values.currency ?? 2);
-      if (this.tipForm.valid) {
-        this.tipService.calcTip();
-      }
-    });
+    this.tipForm.valueChanges
+      .pipe(debounceTime(100), takeUntilDestroyed(this.destroyRef))
+      .subscribe((values: TipFormValue) => {
+        console.log('Изменение значения формы:', values);
+        this.tipService.precent.set(values.precent ?? 0.1);
+        this.tipService.currency.set(values.currency ?? 2);
+        if (this.tipForm.valid) {
+          this.tipService.calcTip();
+        }
+      });
   }
 
   ngOnDestroy() {
