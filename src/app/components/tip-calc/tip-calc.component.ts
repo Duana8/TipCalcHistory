@@ -1,5 +1,4 @@
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TipCalcService } from '../../services/tip-calc/tip-calc.service';
 import { TipEmojiPipe } from './tip-emoji.pipe';
 import {
   Component,
@@ -12,6 +11,9 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { TipCalcService, TipHistoryItem } from '../../services/tip-calc/tip-calc.service';
+import { scan } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 interface TipFormValue {
   bill?: number;
@@ -31,6 +33,13 @@ export class TipCalcComponent implements OnInit, OnDestroy {
   protected tipService = inject(TipCalcService);
   private readonly data = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
+  protected calcStatus = toSignal(this.tipService.status$);
+
+  // накапливаем прилетающие элементы из потока в массив и оборачиваем в сигнал
+  protected historyList = toSignal(
+    this.tipService.history$.pipe(scan((acc, item) => [item, ...acc], [] as TipHistoryItem[])),
+    { initialValue: [] },
+  );
 
   currencies = [
     { name: '₽', value: 2 },

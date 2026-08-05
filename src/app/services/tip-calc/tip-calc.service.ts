@@ -1,9 +1,15 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ReplaySubject, BehaviorSubject } from 'rxjs';
 
 export interface TipHistoryItem {
   bill: number;
   tip: number;
+}
+
+export enum CalcStatus {
+  Idle = 'калькулятор свободен',
+  Calculating = 'вычисляется...',
+  Done = 'готово',
 }
 
 @Injectable({
@@ -19,7 +25,11 @@ export class TipCalcService {
 
   protected timer: any = null;
 
-  public history$ = new BehaviorSubject<TipHistoryItem[]>([]);
+  private readonly historySubject$ = new ReplaySubject<TipHistoryItem>(3);
+  public readonly history$ = this.historySubject$.asObservable();
+
+  private readonly statusSubject$ = new BehaviorSubject<CalcStatus>(CalcStatus.Idle);
+  public readonly status$ = this.statusSubject$.asObservable();
 
   upBillAmount(price: number): void {
     this.bill.update((current) => current + price);
@@ -41,13 +51,9 @@ export class TipCalcService {
       this.tip(),
       this.currency(),
     );
+    this.statusSubject$.next(CalcStatus.Calculating);
 
     console.log('1. Синхронный код: Начало обработчика');
-
-    const historyItem = {
-      bill: this.bill(),
-      tip: this.tip(),
-    };
 
     if (this.timer) {
       clearTimeout(this.timer);
@@ -55,11 +61,17 @@ export class TipCalcService {
 
     this.timer = setTimeout(() => {
       console.log('3. Асинхронная задача: Добавляем заказ в историю');
-      const currentList = this.history$.getValue();
-      this.history$.next([...currentList, historyItem]);
 
       this.timer = null;
       console.log('4. Таймер успешно завершился');
+      const newItem: TipHistoryItem = {
+        bill: this.bill(),
+        tip: this.tip(),
+      };
+
+      this.historySubject$.next(newItem);
+
+      this.statusSubject$.next(CalcStatus.Done);
     }, 3000);
 
     console.log('2. Синхронный код: Конец обработчика');

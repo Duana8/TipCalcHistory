@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { Subject } from 'rxjs';
 
 export interface OrderItem {
   image: string;
@@ -10,6 +11,9 @@ export interface OrderItem {
   providedIn: 'root',
 })
 export class OrderService {
+  private readonly orderNotifSubject$ = new Subject<string>();
+  public readonly orderNotif$ = this.orderNotifSubject$.asObservable();
+
   readonly menu = [
     {
       image:
@@ -36,14 +40,17 @@ export class OrderService {
   addToOrder(image: string, dish: string, price: number) {
     this.orderList.update((list) => [...list, { image, dish, price }]);
     console.log('Добавлено в заказ', dish, price);
+    this.orderNotifSubject$.next(`Добавлено в заказ ${dish} ${price} ₽`);
   }
 
   removeFromOrder(index: number) {
     const removeItem = this.orderList()[index];
     this.orderList.update((list) => list.filter((_, i) => i !== index));
     if (removeItem) {
+      const { dish, price } = removeItem;
       console.log(`Удаленная продукция: №${index}.
                 ${removeItem.dish} ${removeItem.price}`);
+      this.orderNotifSubject$.next(`Удален заказ ${dish} ${price} ₽`);
     }
   }
 }

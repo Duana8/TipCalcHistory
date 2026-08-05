@@ -4,6 +4,9 @@
     <table class="table">
       <thead></thead>
       <tbody>
+        @if (notificationMessage()) {
+          <p>{{ notificationMessage() }}</p>
+        }
         @if (orderService.orderList().length > 0) {
           @for (item of orderService.orderList(); track $index) {
             <tr>
