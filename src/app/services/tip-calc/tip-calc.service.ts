@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Injectable, signal, computed } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export interface TipHistoryItem {
   bill: number;
@@ -11,47 +10,59 @@ export interface TipHistoryItem {
   providedIn: 'root',
 })
 export class TipCalcService {
-  public bill: number = 0;
-  public percent: number = 0.1;
-  public tip: number = 0;
-  public currency: number = 0;
+  public bill = signal<number>(0);
+  public precent = signal<number>(0.1);
+  public currency = signal<number>(2);
+  public tip = computed(() => {
+    return Math.round(this.bill() * this.precent() * this.currency());
+  });
+
+  protected timer: any = null;
 
   // поток
   public history$ = new BehaviorSubject<TipHistoryItem[]>([]);
 
   upBillAmount(price: number): void {
-    this.bill += price;
+    this.bill.update((current) => current + price);
+    this.calcTip();
+    console.log('Новый счет:', this.bill());
   }
 
   downBillAmount(price: number): void {
-    this.bill -= price;
+    this.bill.update((current) => Math.max(0, current - price));
+    this.calcTip();
+    console.log('Новый счет:', this.bill());
   }
 
   calcTip(): void {
-    this.tip = Math.round(this.bill * this.percent * Number(this.currency));
-    console.log('bill, percent, tip, currency', this.bill, this.percent, this.tip, this.currency);
+    console.log(
+      'bill, percent, tip, currency',
+      this.bill(),
+      this.precent(),
+      this.tip(),
+      this.currency(),
+    );
 
     console.log('1. Синхронный код: Начало обработчика');
 
     // данные для отправки в поток
     const historyItem = {
-      bill: this.bill,
-      tip: this.tip,
+      bill: this.bill(),
+      tip: this.tip(),
     };
 
-    // поток
-    of(historyItem)
-      .pipe(delay(3000))
-      .subscribe({
-        next: (item) => {
-          console.log('3. RxJS Асинхронная задача: Добавляем заказ в историю');
-          const currentList = this.history$.getValue();
-          this.history$.next([...currentList, item]);
-        },
-        complete: () => {
-          console.log('4. RxJS Поток завершен');
-        },
-      });
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+
+    this.timer = setTimeout(() => {
+      console.log('3. Асинхронная задача: Добавляем заказ в историю');
+      const currentList = this.history$.getValue();
+      this.history$.next([...currentList, historyItem]);
+
+      this.timer = null;
+      console.log('4. Таймер успешно завершился');
+    }, 3000);
 
     console.log('2. Синхронный код: Конец обработчика');
   }

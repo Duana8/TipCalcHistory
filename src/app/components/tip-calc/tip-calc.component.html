@@ -1,6 +1,6 @@
 <section>
   <h2>Расчет чаевых</h2>
-  <form>
+  <form id="tip-form" [formGroup]="tipForm">
     <div class="form-group">
       <label for="bill-amount">Сумма счета:</label>
       <input
@@ -9,37 +9,31 @@
         id="bill-amount"
         required
         min="10"
-        [(ngModel)]="tipService.bill" />
+        formControlName="bill"
+        readonly />
     </div>
 
     <div class="form-group">
-      <label for="tip-percentage">Процент чаевых: {{ tipService.percent | tipEmoji }}</label>
-      <select name="select-tip-percentage" id="tip-percentage" [(ngModel)]="tipService.percent">
-        <option [value]="0.0">0%</option>
-        <option [value]="0.05">5%</option>
-        <option [value]="0.1" selected>10%</option>
-        <option [value]="0.15">15%</option>
-        <option [value]="0.2">20%</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="currency">Валюта:</label>
-      <select name="select-currency" id="currency" [(ngModel)]="tipService.currency">
-        @for (item of currencies; track $index) {
-          <option [value]="item.value">{{ item.name }}</option>
+      <label for="tip-percentage">Процент чаевых: {{ tipService.precent() | tipEmoji }}</label>
+      <select name="select-tip-percentage" id="tip-percentage" formControlName="precent">
+        @for (tip of percentages; track $index) {
+          <option [ngValue]="tip.value">{{ tip.name }}</option>
         }
       </select>
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn-submit" (click)="tipService.calcTip()">Рассчитать</button>
-      <p>Калькулятор чаевых: рассчитать</p>
+      <label for="currency">Валюта:</label>
+      <select name="select-currency" id="currency" formControlName="currency">
+        @for (item of currencies; track $index) {
+          <option [ngValue]="item.value">{{ item.name }}</option>
+        }
+      </select>
     </div>
   </form>
 </section>
 
-<section class="history-section">
+<section>
   <h2>История расчетов</h2>
   <div id="history-list" class="history-list">
     @if (tipService.history$ | async; as history) {
@@ -52,8 +46,6 @@
           <p>{{ item.bill }} — {{ item.tip }}</p>
         }
       }
-    } @else {
-      <p>Загрузка истории...</p>
     }
   </div>
 </section>
