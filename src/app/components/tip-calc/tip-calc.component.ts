@@ -4,7 +4,6 @@ import { TipEmojiPipe } from './tip-emoji.pipe';
 import { Component, inject, OnInit, effect, OnDestroy, DestroyRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 
 interface TipFormValue {
   bill?: number;
@@ -15,7 +14,7 @@ interface TipFormValue {
 @Component({
   selector: 'app-tip-calc',
   standalone: true,
-  imports: [ReactiveFormsModule, TipEmojiPipe, AsyncPipe],
+  imports: [ReactiveFormsModule, TipEmojiPipe],
   templateUrl: './tip-calc.component.html',
   styleUrls: ['./tip-calc.component.scss'],
 })
