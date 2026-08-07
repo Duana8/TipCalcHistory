@@ -1,15 +1,17 @@
 @use '../../../styles/mixins' as mix;
-    @include mix.form-group;
+
+.form-group {
+  @include mix.form-group;
 }
 
 .btn-order {
-    @include mix.animated-order-button;
+  @include mix.animated-order-button;
 }
 
 .table {
-    @include mix.styled-table;
+  @include mix.styled-table;
 }
 
 .image-container {
-    @include mix.image-container(80px);
+  @include mix.image-container(80px);
 }
