@@ -5,7 +5,7 @@
 }
 
 .btn-order {
-  @include mix.animated-order-button;
+  @include mix.order-button;
 }
 
 .table {
@@ -13,5 +13,5 @@
 }
 
 .image-container {
-  @include mix.image-container(80px);
+  @include mix.image-container(70px);
 }
