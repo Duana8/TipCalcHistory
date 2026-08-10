@@ -1,0 +1,17 @@
+@use 'mixins' as mix;
+
+.form-group {
+  @include mix.form-group;
+}
+
+.btn-order {
+  @include mix.order-button;
+}
+
+.table {
+  @include mix.styled-table;
+}
+
+.image-container {
+  @include mix.image-container(70px);
+}
