@@ -8,6 +8,6 @@ import { TipCalcComponent } from '../tip-calc/tip-calc.component';
   standalone: true,
   imports: [MenuComponent, OrderComponent, TipCalcComponent],
   templateUrl: './main-page.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
-export class MainPageComponent { }
+export class MainPageComponent {}

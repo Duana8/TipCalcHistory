@@ -1,9 +1,9 @@
-<section class="history-section">
+<section>
   <h2>История расчетов</h2>
-  <div id="history-list" class="history-list">
+  <div>
     @if (tipService.history$ | async; as history) {
       @if (history.length === 0) {
-        <p id="empty-message" class="empty-message">История пока пуста...</p>
+        <p class="empty-message">История пока пуста...</p>
       } @else {
         @for (item of history; track $index) {
           <p>{{ item.bill }} — {{ item.tip }}</p>

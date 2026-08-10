@@ -19,7 +19,6 @@ export class TipCalcService {
 
   protected timer: any = null;
 
-  // поток
   public history$ = new BehaviorSubject<TipHistoryItem[]>([]);
 
   upBillAmount(price: number): void {
@@ -45,7 +44,6 @@ export class TipCalcService {
 
     console.log('1. Синхронный код: Начало обработчика');
 
-    // данные для отправки в поток
     const historyItem = {
       bill: this.bill(),
       tip: this.tip(),

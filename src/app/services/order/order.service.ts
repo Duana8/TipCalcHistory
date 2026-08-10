@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 export interface OrderItem {
   image: string;
@@ -42,7 +42,7 @@ export class OrderService {
     const removeItem = this.orderList()[index];
     this.orderList.update((list) => list.filter((_, i) => i !== index));
     if (removeItem) {
-      console.log(`Удаленная продукция: №${index}. 
+      console.log(`Удаленная продукция: №${index}.
                 ${removeItem.dish} ${removeItem.price}`);
     }
   }

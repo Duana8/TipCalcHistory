@@ -2,21 +2,20 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'tipEmoji',
-  standalone: true
+  standalone: true,
 })
 export class TipEmojiPipe implements PipeTransform {
-
   transform(percent: number): string {
-    const pct = Math.round(Number(percent) * 100); 
+    const pct = Math.round(Number(percent) * 100);
 
     if (pct === 0) {
       return '❌';
     }
-    
+
     if (pct === 5 || pct === 10) {
       return '😐';
     }
-    
+
     if (pct === 15) {
       return '🙂';
     }
