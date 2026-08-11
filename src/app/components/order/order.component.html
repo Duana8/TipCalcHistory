@@ -4,11 +4,15 @@
     <table class="table">
       <thead></thead>
       <tbody>
-        @if (notificationMessage()) {
-          <p>{{ notificationMessage() }}</p>
+        @let msg = notificationMessage();
+
+        @if (msg) {
+          <p>{{ msg }}</p>
         }
-        @if (orderService.orderList().length > 0) {
-          @for (item of orderService.orderList(); track $index) {
+        @let list = orderService.orderList();
+
+        @if (list.length > 0) {
+          @for (item of list; track $index) {
             <tr>
               <td>
                 <img [src]="item.image" [alt]="item.dish" class="image-container" />

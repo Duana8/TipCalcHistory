@@ -1,13 +1,13 @@
 <section>
   <h2>История расчетов</h2>
   <div>
-    @if (tipService.history$ | async; as history) {
-      @if (history.length === 0) {
-        <p class="empty-message">История пока пуста...</p>
-      } @else {
-        @for (item of history; track $index) {
-          <p>{{ item.bill }} — {{ item.tip }}</p>
-        }
+    @let history = historyList();
+
+    @if (history.length === 0) {
+      <p class="empty-message">История пока пуста...</p>
+    } @else {
+      @for (item of history; track $index) {
+        <p>{{ item.bill }} — {{ item.tip }}</p>
       }
     }
   </div>

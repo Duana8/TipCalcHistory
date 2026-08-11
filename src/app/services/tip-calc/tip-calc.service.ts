@@ -9,7 +9,6 @@ export interface TipHistoryItem {
 export enum CalcStatus {
   Idle = 'калькулятор свободен',
   Calculating = 'вычисляется...',
-  Done = 'готово',
 }
 
 @Injectable({
@@ -71,7 +70,7 @@ export class TipCalcService {
 
       this.historySubject$.next(newItem);
 
-      this.statusSubject$.next(CalcStatus.Done);
+      this.statusSubject$.next(CalcStatus.Idle);
     }, 3000);
 
     console.log('2. Синхронный код: Конец обработчика');

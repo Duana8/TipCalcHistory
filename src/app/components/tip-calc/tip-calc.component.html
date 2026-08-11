@@ -13,11 +13,13 @@
         readonly />
     </div>
 
+    @let percent = tipService.precent();
+
     <div class="form-group">
-      <label for="tip-percentage">Процент чаевых: {{ tipService.precent() | tipEmoji }}</label>
+      <label for="tip-percentage">Процент чаевых: {{ percent | tipEmoji }}</label>
       <select name="select-tip-percentage" id="tip-percentage" formControlName="precent">
-        @for (tip of percentages; track $index) {
-          <option [ngValue]="tip.value">{{ tip.name }}</option>
+        @for (item of percentages; track item.value) {
+          <option [ngValue]="item.value">{{ item.name }}</option>
         }
       </select>
     </div>
@@ -25,10 +27,12 @@
     <div class="form-group">
       <label for="currency">Валюта:</label>
       <select name="select-currency" id="currency" formControlName="currency">
-        @for (item of currencies; track $index) {
+        @for (item of currencies; track item.value) {
           <option [ngValue]="item.value">{{ item.name }}</option>
         }
       </select>
+
+      <p>{{ calcStatus() }}</p>
     </div>
   </form>
 </section>

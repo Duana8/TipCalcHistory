@@ -4,6 +4,7 @@ import { CurrencyPipe } from '@angular/common';
 import { TipCalcService } from '../../services/tip-calc/tip-calc.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, concat, of, delay } from 'rxjs';
+
 @Component({
   selector: 'app-order',
   standalone: true,
