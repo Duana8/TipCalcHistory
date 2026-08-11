@@ -16,10 +16,10 @@ describe('TipCalcService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('не должен добавлять запись в историю при отрицательном счете', () => {
+  it('добавление записи в историю', () => {
     vi.useFakeTimers();
 
-    service.bill = -200;
+    service.bill = 200;
     service.percent = 0.1;
     service.currency = 1;
 

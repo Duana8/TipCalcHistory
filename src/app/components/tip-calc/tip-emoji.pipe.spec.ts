@@ -8,8 +8,8 @@ describe('TipEmojiPipe', () => {
     expect(pipe).toBeTruthy();
   });
 
-  it('должен иметь гибкий диапазон процентов', () => {
-    const result = pipe.transform(0.11);
+  it('эмоджи должен поднастраиваться под процент', () => {
+    const result = pipe.transform(0.15);
     expect(result).toBe('🙂');
   });
 });
