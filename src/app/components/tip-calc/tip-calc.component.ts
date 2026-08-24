@@ -1,7 +1,15 @@
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TipCalcService } from '../../services/tip-calc/tip-calc.service';
 import { TipEmojiPipe } from './tip-emoji.pipe';
-import { Component, inject, OnInit, effect, OnDestroy, DestroyRef } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  effect,
+  OnDestroy,
+  DestroyRef,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
@@ -17,6 +25,7 @@ interface TipFormValue {
   imports: [ReactiveFormsModule, TipEmojiPipe],
   templateUrl: './tip-calc.component.html',
   styleUrls: ['./tip-calc.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TipCalcComponent implements OnInit, OnDestroy {
   protected tipService = inject(TipCalcService);
