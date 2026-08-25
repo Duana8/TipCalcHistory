@@ -27,8 +27,8 @@
     <div class="form-group">
       <label for="currency">Валюта:</label>
       <select name="select-currency" id="currency" formControlName="currency">
-        @for (item of currencies; track item.value) {
-          <option [ngValue]="item.value">{{ item.name }}</option>
+        @for (item of currencies; track item) {
+          <option [ngValue]="item">{{ item }}</option>
         }
       </select>
 

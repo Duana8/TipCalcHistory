@@ -18,7 +18,7 @@
                 <img [src]="item.image" [alt]="item.dish" class="image-container" />
               </td>
               <td>{{ item.dish }}</td>
-              <td>{{ item.price | currency: 'RUB' : 'symbol' : '1.0-0' }}</td>
+              <td>{{ item.price }} {{ tipService.currency() }}</td>
               <td>
                 <button
                   type="button"

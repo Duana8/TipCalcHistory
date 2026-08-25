@@ -40,7 +40,7 @@ export class OrderService {
   addToOrder(image: string, dish: string, price: number) {
     this.orderList.update((list) => [...list, { image, dish, price }]);
     console.log('Добавлено в заказ', dish, price);
-    this.orderNotifSubject$.next(`Добавлено в заказ ${dish} ${price} ₽`);
+    this.orderNotifSubject$.next(`Добавлено в заказ ${dish} прайс: ${price}`);
   }
 
   removeFromOrder(index: number) {
@@ -50,7 +50,7 @@ export class OrderService {
       const { dish, price } = removeItem;
       console.log(`Удаленная продукция: №${index}.
                 ${removeItem.dish} ${removeItem.price}`);
-      this.orderNotifSubject$.next(`Удален заказ ${dish} ${price} ₽`);
+      this.orderNotifSubject$.next(`Удален заказ ${dish} прайс: ${price}`);
     }
   }
 }

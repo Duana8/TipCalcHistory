@@ -1,9 +1,10 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { ReplaySubject, BehaviorSubject } from 'rxjs';
-
+import { CurrencySymbol } from '../../models/currency.model';
 export interface TipHistoryItem {
   bill: number;
   tip: number;
+  currency: CurrencySymbol;
 }
 
 export enum CalcStatus {
@@ -17,9 +18,10 @@ export enum CalcStatus {
 export class TipCalcService {
   public bill = signal<number>(0);
   public precent = signal<number>(0.1);
-  public currency = signal<number>(2);
+  public currency = signal<CurrencySymbol>('₽');
+
   public tip = computed(() => {
-    return Math.round(this.bill() * this.precent() * this.currency());
+    return Math.round(this.bill() * this.precent());
   });
 
   protected timer: any = null;
@@ -66,6 +68,7 @@ export class TipCalcService {
       const newItem: TipHistoryItem = {
         bill: this.bill(),
         tip: this.tip(),
+        currency: this.currency(),
       };
 
       this.historySubject$.next(newItem);

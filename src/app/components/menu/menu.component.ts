@@ -1,12 +1,10 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { OrderService } from '../../services/order/order.service';
-import { CurrencyPipe } from '@angular/common';
 import { TipCalcService } from '../../services/tip-calc/tip-calc.service';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CurrencyPipe],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

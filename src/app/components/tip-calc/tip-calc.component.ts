@@ -13,11 +13,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { TipCalcService } from '../../services/tip-calc/tip-calc.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { CurrencySymbol, CURRENCIES } from '../../models/currency.model';
 
 interface TipFormValue {
   bill?: number;
   precent?: number;
-  currency?: number;
+  currency?: CurrencySymbol;
 }
 
 @Component({
@@ -33,12 +34,7 @@ export class TipCalcComponent implements OnInit, OnDestroy {
   private readonly data = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
   protected calcStatus = toSignal(this.tipService.status$);
-
-  currencies = [
-    { name: '₽', value: 2 },
-    { name: '$', value: 5 },
-    { name: '€', value: 8 },
-  ];
+  protected readonly currencies = CURRENCIES;
 
   percentages = [
     { name: '5%', value: 0.05 },
@@ -65,7 +61,7 @@ export class TipCalcComponent implements OnInit, OnDestroy {
       .subscribe((values: TipFormValue) => {
         console.log('Изменение значения формы:', values);
         this.tipService.precent.set(values.precent ?? 0.1);
-        this.tipService.currency.set(values.currency ?? 2);
+        this.tipService.currency.set(values.currency ?? CURRENCIES[0]);
         if (this.tipForm.valid) {
           this.tipService.calcTip();
         }

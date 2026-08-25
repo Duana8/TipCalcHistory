@@ -7,7 +7,11 @@
       <p class="empty-message">История пока пуста...</p>
     } @else {
       @for (item of history; track $index) {
-        <p>{{ item.bill }} — {{ item.tip }}</p>
+        <p>
+          @let currency = item.currency;
+
+          {{ item.bill }} {{ currency }} — {{ item.tip }} {{ currency }}
+        </p>
       }
     }
   </div>
